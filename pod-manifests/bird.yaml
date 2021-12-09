@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bird
+spec:
+  hostNetwork: true
+  containers:
+    - name: bird
+      image: mazzy/bird:v2.0.8
+      ports:
+        - name: bird
+          containerPort: 179
+          protocol: TCP
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+            - NET_BROADCAST
+            - NET_RAW
+      volumeMounts:
+        - name: bird-conf
+          mountPath: /config/bird
+  volumes:
+    - name: bird-conf
+      hostPath:
+        path: /var/lib/misc/bird
+        type: Directory
