@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p /var/log/bird
+
+sed -i '/log syslog all;/c\# log syslog all;' /etc/bird/bird.conf
+sed -i '/# log \"\/var\/log\/bird.log\"/c\log \"\/var\/log\/bird\/bird.log\" { debug, trace, info, remote, warning, error, auth, fatal, bug };' /etc/bird/bird.conf
+
+# cleanup stale pid and sock files
+[[ -e /var/run/bird/bird.pid || -e /var/run/bird/bird.ctl ]] && \
+	rm -rf /var/run/bird/*
+
+
+# permissions
+chown -R abc:abc /var/log/bird

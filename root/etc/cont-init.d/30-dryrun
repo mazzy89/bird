@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+echo "Test configuration file and exit without start."
+exec \
+    s6-setuidgid abc \
+    /usr/local/sbin/bird -p

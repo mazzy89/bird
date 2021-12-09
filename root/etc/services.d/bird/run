@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+echo "Starting Bird."
+exec \
+    s6-setuidgid abc \
+    /usr/local/sbin/bird -f -P /var/run/bird/bird.pid
