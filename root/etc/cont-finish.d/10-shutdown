@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-kill -TERM "$(cat /var/run/bird/bird.pid)"
