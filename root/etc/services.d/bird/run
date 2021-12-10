@@ -1,9 +1,13 @@
 #!/usr/bin/with-contenv bash
 
+BIRD_RUN_USER=abc
+BIRD_RUN_GROUP=abc
+
 echo "Starting Bird."
 exec \
-    s6-setuidgid abc \
     /usr/local/sbin/bird \
     -f \
     -P /var/run/bird/bird.pid \
-    -c /config/bird/bird.conf
+    -c /config/bird/bird.conf \
+    -u $BIRD_RUN_USER \
+    -g $BIRD_RUN_GROUP
